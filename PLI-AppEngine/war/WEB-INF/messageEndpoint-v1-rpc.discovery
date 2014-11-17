@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"9mnLCPwbyZOHH18t8ExzO2gqgTk/c-Zz1UI4JZYbhPDGo6PD4K64Rmc\"",
+ "etag": "\"9mnLCPwbyZOHH18t8ExzO2gqgTk/tt7fvx8nh3_K9HgPzNtogu0X4FI\"",
  "discoveryVersion": "v1",
  "id": "messageEndpoint:v1",
  "name": "messageEndpoint",
@@ -13,8 +13,8 @@
   "x32": "http://www.google.com/images/icons/product/search-32.gif"
  },
  "protocol": "rpc",
- "rootUrl": "https://myapp.appspot.com/_ah/api/",
- "rpcUrl": "https://myapp.appspot.com/_ah/api/rpc",
+ "rootUrl": "https://plikley-ee461l.appspot.com/_ah/api/",
+ "rpcUrl": "https://plikley-ee461l.appspot.com/_ah/api/rpc",
  "rpcPath": "/_ah/api/rpc",
  "parameters": {
   "alt": {
