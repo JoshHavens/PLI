@@ -1,10 +1,12 @@
 package com.pli;
 
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.pli.messageEndpoint.MessageEndpoint;
 import com.pli.messageEndpoint.model.CollectionResponseMessageData;
 import com.pli.messageEndpoint.model.MessageData;
+import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestInitializer;
@@ -60,6 +62,10 @@ public class RegisterActivity extends Activity {
   private OnTouchListener registerListener = null;
   private OnTouchListener unregisterListener = null;
   private MessageEndpoint messageEndpoint = null;
+  private OnTouchListener returnMsgListener = null;
+  private GoogleCloudMessaging gcm = null;
+  private AtomicInteger msgId = new AtomicInteger();
+  protected static final String PROJECT_NUMBER = "56297130853";
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -67,6 +73,7 @@ public class RegisterActivity extends Activity {
     setContentView(R.layout.activity_register);
 
     Button regButton = (Button) findViewById(R.id.regButton);
+    Button sendButton = (Button) findViewById(R.id.button1);
 
     registerListener = new OnTouchListener() {
       @Override
@@ -104,6 +111,28 @@ public class RegisterActivity extends Activity {
         }
       }
     };
+    
+    returnMsgListener = new OnTouchListener() {
+		
+		@Override
+		public boolean onTouch(View v, MotionEvent event) {
+			String msg = "";
+            try {
+                Bundle data = new Bundle();
+                    data.putString("my_message", "Hello World");
+                    data.putString("my_action",
+                            "com.google.android.gcm.demo.app.ECHO_NOW");
+                    String id = Integer.toString(msgId.incrementAndGet());
+                    gcm.send(PROJECT_NUMBER + "@gcm.googleapis.com", id, data);
+                    msg = "Sent message";
+            } catch (IOException ex) {
+                msg = "Error :" + ex.getMessage();
+            } catch (Exception e) {
+            	System.out.println("Error.");
+            }
+            return false;
+		}
+	};
 
     unregisterListener = new OnTouchListener() {
       @Override
@@ -122,6 +151,7 @@ public class RegisterActivity extends Activity {
     };
 
     regButton.setOnTouchListener(registerListener);
+    sendButton.setOnTouchListener(returnMsgListener);
     
     /*
      * build the messaging endpoint so we can access old messages via an endpoint call

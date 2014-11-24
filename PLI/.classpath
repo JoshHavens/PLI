@@ -15,5 +15,7 @@
 	<classpathentry kind="src" path="PLI/endpoint-libs/libdeviceinfoendpoint-v1/deviceinfoendpoint/deviceinfoendpoint-v1-generated-source"/>
 	<classpathentry kind="src" path="PLI/endpoint-libs/libmessageEndpoint-v1/messageEndpoint/messageendpoint-v1-generated-source"/>
 	<classpathentry kind="lib" path="/google-play-services_lib/bin/google-play-services_lib.jar"/>
+	<classpathentry kind="src" path="/google-play-services_lib"/>
+	<classpathentry exported="true" kind="lib" path="/Users/user/Documents/workspace/google-play-services_lib/libs/google-play-services.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
