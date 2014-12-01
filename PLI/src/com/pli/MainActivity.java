@@ -1,5 +1,7 @@
 package com.pli;
 
+import com.firebase.client.Firebase;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -19,8 +21,11 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		Firebase.setAndroidContext(this);
+		Firebase myFirebaseRef = FirebaseAPI.getInstance();
+		
 		// Start up RegisterActivity right away
+		myFirebaseRef.child("message").setValue("Hello.");
 		Intent intent = new Intent(this, RegisterActivity.class);
 		startActivity(intent);
 		// Since this is just a wrapper to start the main activity,

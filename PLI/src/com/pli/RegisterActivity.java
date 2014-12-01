@@ -21,9 +21,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * An activity that communicates with your App Engine backend via Cloud
@@ -62,7 +64,7 @@ public class RegisterActivity extends Activity {
   private OnTouchListener registerListener = null;
   private OnTouchListener unregisterListener = null;
   private MessageEndpoint messageEndpoint = null;
-  private OnTouchListener returnMsgListener = null;
+  private OnClickListener returnMsgListener = null;
   private GoogleCloudMessaging gcm = null;
   private AtomicInteger msgId = new AtomicInteger();
   protected static final String PROJECT_NUMBER = "56297130853";
@@ -74,6 +76,14 @@ public class RegisterActivity extends Activity {
 
     Button regButton = (Button) findViewById(R.id.regButton);
     Button sendButton = (Button) findViewById(R.id.button1);
+    
+    gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
+    try {
+		gcm.register(PROJECT_NUMBER);
+	} catch (IOException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
 
     registerListener = new OnTouchListener() {
       @Override
@@ -112,25 +122,28 @@ public class RegisterActivity extends Activity {
       }
     };
     
-    returnMsgListener = new OnTouchListener() {
+    returnMsgListener = new OnClickListener() {
 		
-		@Override
-		public boolean onTouch(View v, MotionEvent event) {
+		public void onClick(View v) {
 			String msg = "";
             try {
                 Bundle data = new Bundle();
                     data.putString("my_message", "Hello World");
                     data.putString("my_action",
                             "com.google.android.gcm.demo.app.ECHO_NOW");
+                    Toast.makeText(getApplicationContext(), "data = " + data.toString(), Toast.LENGTH_LONG).show();
                     String id = Integer.toString(msgId.incrementAndGet());
+                    Toast.makeText(getApplicationContext(), "id = " + id, Toast.LENGTH_LONG).show();
                     gcm.send(PROJECT_NUMBER + "@gcm.googleapis.com", id, data);
                     msg = "Sent message";
-            } catch (IOException ex) {
-                msg = "Error :" + ex.getMessage();
+                    Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+                    
             } catch (Exception e) {
             	System.out.println("Error.");
+            	if (e != null) {
+            		System.out.println(e.getMessage());
+            	}
             }
-            return false;
 		}
 	};
 
@@ -151,7 +164,7 @@ public class RegisterActivity extends Activity {
     };
 
     regButton.setOnTouchListener(registerListener);
-    sendButton.setOnTouchListener(returnMsgListener);
+    sendButton.setOnClickListener(returnMsgListener);
     
     /*
      * build the messaging endpoint so we can access old messages via an endpoint call
