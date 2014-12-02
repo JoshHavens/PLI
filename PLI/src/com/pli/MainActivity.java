@@ -11,7 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 
 public class MainActivity extends Activity {
-	private String displayName = "";
+	private static String displayName = "";
 	private static Button room1;
 	private static Button room2;
 	private static Button room3;
@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
 		room1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {   
             	intent.putExtra("Name", displayName);
-            	intent.putExtra("Number", 1);
+            	intent.putExtra("Number", "Room1");
         		startActivity(intent);
             }
         });
@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
 		room2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             	intent.putExtra("Name", displayName);
-            	intent.putExtra("Number", 2);
+            	intent.putExtra("Number", "Room2");
         		startActivity(intent);
             }
         });
@@ -44,11 +44,13 @@ public class MainActivity extends Activity {
 		room3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             	intent.putExtra("Name", displayName);
-            	intent.putExtra("Number", 3);
+            	intent.putExtra("Number", "Room3");
         		startActivity(intent);
             }
         });
-		promptForName();
+		if (displayName == "") {
+			promptForName();
+		}
 	}
 
 	private void promptForName() {
