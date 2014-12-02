@@ -251,7 +251,7 @@ public class GCMIntentService extends GCMBaseIntentService {
    */
   private void sendNotificationIntent(Context context, String message,
       boolean isError, boolean isRegistrationMessage) {
-    Intent notificationIntent = new Intent(context, RegisterActivity.class);
+    Intent notificationIntent = new Intent(context, RoomActivity.class);
     notificationIntent.putExtra("gcmIntentServiceMessage", true);
     notificationIntent.putExtra("registrationMessage",
         isRegistrationMessage);
