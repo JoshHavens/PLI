@@ -1,12 +1,6 @@
-# view AndroidManifest.xml #generated:22
--keep class com.google.android.gcm.GCMBroadcastReceiver { <init>(...); }
-
-# view AndroidManifest.xml #generated:21
--keep class com.pli.GCMIntentService { <init>(...); }
-
-# view AndroidManifest.xml #generated:14
+# view AndroidManifest.xml #generated:28
 -keep class com.pli.MainActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:33
--keep class com.pli.RegisterActivity { <init>(...); }
+# view AndroidManifest.xml #generated:37
+-keep class com.pli.RoomActivity { <init>(...); }
 

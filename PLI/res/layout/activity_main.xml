@@ -5,10 +5,40 @@
     tools:context=".MainActivity" >
 
     <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world" />
+        android:text="Welcome to PLI-kley!" />
+
+    <Button
+        android:id="@+id/room3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/room2"
+        android:layout_marginTop="78dp"
+        android:layout_weight="0"
+        android:text="Room 3" />
+
+    <Button
+        android:id="@+id/room2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/room1"
+        android:layout_marginTop="110dp"
+        android:layout_weight="0"
+        android:text="Room 2" />
+
+    <Button
+        android:id="@+id/room1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="98dp"
+        android:layout_weight="0"
+        android:text="Room 1" />
 
 </RelativeLayout>
