@@ -9,8 +9,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+   <!-- Firebase install -->
    <script src="https://cdn.firebase.com/js/client/2.0.5/firebase.js"></script>
-   
+      
 	<link rel="shortcut icon" href="https://cdn2.iconfinder.com/data/icons/office/512/Icon_8-512.png">
 
     <title>Phone Laptop Interface</title>
@@ -97,11 +98,62 @@ th {
     <!-- Content Section -->
     <section>
    <script type="text/javascript">
-      var myFirebaseRef = new Firebase("https://pli-kley.firebaseio.com/");
-      alert("text");
-      alert("myFirebaseRef");
-      var currentTime = new Date();
-      myFirebaseRef.child('Hello World').set('message content.');
+      var myFirebaseRef = new Firebase("https://pli-kley.firebaseio.com/Room1");
+      
+      
+      myFirebaseRef.on("value", function(snapshot) {
+  //alert(snapshot.val());
+  console.log('printing snapshot');
+  console.log(snapshot.val());
+}, function (errorObject) {
+  console.log("The read failed: " + errorObject.code);
+});
+
+      function setRoundStart(){
+         myFirebaseRef.child('startRound').set('true');
+      }
+      
+      function setEndRound(){
+         myFirebaseRef.child('startRound').set(null);
+      }
+      
+      function getUsers(){
+         myFirebaseRef.once('value', function(snap){
+            var ss=snap.val();
+            //return a JSObject
+            return ss;
+            //return a JSON object
+            //return JSON.stringify(ss);
+         });
+      }
+      
+      var debug = 0;
+      if(debug == 1){
+         myFirebaseRef.child('Users').child('1').child('devID').set(12345);
+         
+         myFirebaseRef.child('Users').child('2').child('devID').set(24680);
+   
+         myFirebaseRef.child('Users').child('3').child('devID').set(12486);
+         
+         myFirebaseRef.child('Users').child('1').child('devID').set(null);
+         
+         x = getUsers();
+         console.log('printing getUsers()');
+         console.log(x);
+      }
+      
+      function getName(i){
+         return myFirebaseRef.child(i).child('name').value();
+      }
+      
+      function getCommand(i){
+         return myFirebaseRef.child(i).child(command).value();
+      }
+      
+      function getNumPlayers(){
+         return 0;
+      }
+      
    </script>
    
         <div class="container">
