@@ -1,13 +1,9 @@
 package com.pli;
 
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 
 public class MainActivity extends Activity {
@@ -15,6 +11,7 @@ public class MainActivity extends Activity {
 	private static Button room1;
 	private static Button room2;
 	private static Button room3;
+	private static Button changeName;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +20,13 @@ public class MainActivity extends Activity {
 		room1 = (Button) findViewById(R.id.room1);
 		room2 = (Button) findViewById(R.id.room2);
 		room3 = (Button) findViewById(R.id.room3);
+		changeName = (Button) findViewById(R.id.changeName);
+		
+		displayName = getIntent().getExtras().getString("Name");
 		final Intent intent = new Intent(this, RoomActivity.class);
 		
 		room1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {   
+            public void onClick(View v) { 
             	intent.putExtra("Name", displayName);
             	intent.putExtra("Number", "Room1");
         		startActivity(intent);
@@ -48,25 +48,13 @@ public class MainActivity extends Activity {
         		startActivity(intent);
             }
         });
-		if (displayName == "") {
-			promptForName();
-		}
-	}
-
-	private void promptForName() {
-		AlertDialog.Builder alert = new AlertDialog.Builder(this);
-		alert.setTitle("Choose Name");
-		alert.setMessage("Enter your display name below");
-		final EditText input = new EditText(this);
-		alert.setView(input);
-		alert.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
-
-			public void onClick(DialogInterface dialog, int which) {
-				Editable value = input.getText();
-				displayName = value.toString();
-			}
-			
-		});
-		alert.show();
+		
+		changeName.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	final Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        		startActivity(intent);
+        		finish();
+            }
+        });
 	}
 }

@@ -1,6 +1,9 @@
+# view AndroidManifest.xml #generated:35
+-keep class com.pli.LoginActivity { <init>(...); }
+
 # view AndroidManifest.xml #generated:28
 -keep class com.pli.MainActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:37
+# view AndroidManifest.xml #generated:32
 -keep class com.pli.RoomActivity { <init>(...); }
 
