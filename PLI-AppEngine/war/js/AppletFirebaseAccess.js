@@ -22,6 +22,10 @@ function getUsers() {
 	});
 }
 
+function tossAlert(s){
+	alert(s);
+}
+
 var debug = 0;
 if (debug == 1) {
 	myFirebaseRef.child('Users').child('1').child('devID').set(12345);
