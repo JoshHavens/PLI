@@ -4,5 +4,8 @@
     <string name="app_name">PLI</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-
+    <string name="welcome">Welcome to PLI-kley!</string>
+    <string name="display_name">Please enter your display name.</string>
+	<string name="login">Log in</string>
+    
 </resources>
