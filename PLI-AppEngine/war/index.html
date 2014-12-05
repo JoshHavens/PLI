@@ -1,278 +1,175 @@
 <!DOCTYPE html>
-
 <html lang="en">
+
 <head>
-<title>Cloud Endpoints Starter Template</title>
-<!-- Bootstrap -->
-<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-<!-- Styles, taken from Bootstrap Sign-in Form Example.-->
-<style type="text/css">
-body {
-	padding-top: 40px;
-	padding-bottom: 40px;
-	background-color: #f5f5f5;
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+	<link rel="shortcut icon" href="https://cdn2.iconfinder.com/data/icons/office/512/Icon_8-512.png">
+
+    <title>Phone Laptop Interface</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.minn.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/full-width-pics.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<style>
+table, td, th {
+    border: 1px solid black;
+    font-size:20px;
+    text-align: center;
+    border-collapse: collapse;
 }
 
-.regDevicesSection {
-	margin-top: 30px;
+td{
+	padding: 25px;
 }
 
-.devicenameCol {
-	max-width: 150px;
+th{
+	padding: 15px;
 }
 
-.deviceIdCol {
-	max-width: 500px;
-	word-wrap: break-word;
-}
-
-.form-sendmessage {
-	max-width: 300px;
-	padding: 29px 29px 29px;
-	margin: 50px auto 20px;
-	background-color: #fff;
-	border: 1px solid #e5e5e5;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
-	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
-	box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
-}
-
-.form-sendmessage input[type="text"] {
-	font-size: 16px;
-	height: auto;
-	margin-bottom: 15px;
-	padding: 7px 9px;
-}
-
-.alertStyle {
-	max-width: 300px;
-	margin: 5px auto 20px;
+th {
+    background-color: black;
+    color: white;
 }
 </style>
 
-<script type="text/javascript">
-
-API_URL = 'https://' + window.location.host + '/_ah/api';
-
-if (window.location.hostname == 'localhost'
-    || window.location.hostname == '127.0.0.1'
-    || ((window.location.port != "") && (window.location.port > 999))) {
-    // We're probably running against the DevAppServer
-    API_URL = 'http://' + window.location.host + '/_ah/api';
-}
-
-  function showSuccess() { 
-    $("#alertArea").hide();
-    $("#successArea").show();
-    $("#successArea").fadeOut(1000);
-  }
-  
-  function showError(errorHtml) {
-    $("#alertArea").removeClass('alert-error alert-info alert-success').addClass('alert-error');
-    $("#alertContentArea").html(errorHtml);
-    $("#alertArea").show();
-  }
-    
-  function showInfo(infoHtml) {
-    $("#alertArea").removeClass('alert-error alert-info alert-success').addClass('alert-info');
-    $("#alertContentArea").html(infoHtml);
-    $("#alertArea").show();
-  }
-  
-  // This method loads the deviceinfoendpoint and messageEndpoint libraries
-  function loadGapi() {
-    gapi.client.load('deviceinfoendpoint', 'v1', function() {
-      updateRegisteredDeviceTable();
-    });
-    
-    gapi.client.load('messageEndpoint', 'v1', function() {});
-  }
-
-  // Function for checking error responses; it correctly sanitizes error messages
-  // so that they are safe to display in the UI
-  function checkErrorResponse(result) {      
-    if (result && result.error) {
-      var safeErrorHtml = $('<div/>').text(result.error.message).html();
-      return {isError: true, errorMessage: safeErrorHtml};
-    }
-    
-    return {isError: false};
-  }
-  
-  function generateRegDeviceTable(deviceInfoItems) {
-    items = deviceInfoItems.items;
-  
-    if (!items || items.length == 0) {
-      var htmlString = "<thead>"
-          + "<tr>"
-          + "<th>There are no registered devices</th>"
-          + "</tr>" + "</thead>"
-          + "<tbody></tbody>";
-      $("#regDevicesTable").html(htmlString);
-    } else {
-      var htmlString = "<thead>" + "<tr>"
-          + "<th style='min-width:150px'>Device Name</th>"
-          + "<th>Registration Id</th>"
-          + "<th>Timestamp</th>" 
-          + "</tr>" + "</thead>"          
-          + "<tbody>";
-          
-      for (var i = 0; i < items.length; i++) {
-        item = items[i];
-        htmlString += "<tr>";
-        if (item.deviceInformation) {
-          htmlString += "<td class='devicenameCol'>" + item.deviceInformation
-              + "</td>";
-        } else {
-          htmlString += "<td class='devicenameCol'>" + "(unknown)"
-              + "</td>";
-        }
-
-        if (item.deviceRegistrationID) {
-          htmlString += "<td class='deviceIdCol'>" + item.deviceRegistrationID + "</td>";
-        } else {
-          htmlString += "<td class='deviceIdCol'>" + "(unknown)"
-          + "</td>";        
-        }
-        
-        
-        if (item.timestamp) {
-          var timestampNumberic = new Number(item.timestamp);
-          var date = new Date(timestampNumberic);
-
-          
-            htmlString += "<td>" + date.toString() + "</td>";
-          } else {
-            htmlString += "<td>" + "(unknown)"
-            + "</td>";        
-          }
-        
-        htmlString += "</tr>";
-      }
-
-      htmlString += "</tbody>";
-      $("#regDevicesTable").html(htmlString);
-    }
-  }
-  
-  function updateRegisteredDeviceTable() {
-    gapi.client.deviceinfoendpoint
-        .listDeviceInfo()
-        .execute(
-            function(deviceInfoItems, deviceInfoItemsRaw) {
-              errorResult = checkErrorResponse(deviceInfoItems, deviceInfoItemsRaw);
-              if (errorResult.isError) {
-                showError("There was a problem contacting the server when attempting to list the registered devices. " 
-                    + "Please refresh the page and try again in a short while. Here's the error information:<br/> "
-                    + errorResult.errorMessage);
-              } else {
-                generateRegDeviceTable(deviceInfoItems);              
-              }
-            });
-  }
-  
-  function handleMessageResponse(data, dataRaw) {
-    errorResult = checkErrorResponse(data, dataRaw);    
-    if (!errorResult.isError) { 
-        showSuccess();        
-    } else {
-    showError("There was a problem when attempting to send the message using the server at " 
-        + API_URL + ". " + " Is your API Key in MessageEndpoint.java "  
-        + "(in your App Engine project) set correctly? Here's the error information:<br/>"
-            + errorResult.errorMessage);
-    }
-  }
-  
-  function sendMessage() {
-    var message = $("#inputMessage").val();
-
-    if (message == "") {
-      showInfo("Message must not be empty!");
-      } else {
-        gapi.client.messageEndpoint
-        .sendMessage({"message": message})
-        .execute(handleMessageResponse);
-      }
-  }
-</script>
-</head>
 
 <body>
 
-<a href='PLILandingPage.html'>CHECKKKKKKKKKKKKKKKKKK</a>
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Home</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#">About Us</a>
+                    </li>
+                    <li>
+                        <a href="http://1-dot-plikley-ee461l-blog.appspot.com/">Blog Page</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
 
- <div class="container">
-  <h1>Cloud Endpoints Starter Template</h1>
-  <p style="">This sample lists all of your registered Android
-   devices by accessing the Cloud Endpoint exposed by your App Engine
-   App.</p>
-  <p>Use the form below to send a message (via Cloud Endpoints) to
-   your App Engine Server, which will then send a message (via Cloud
-   Messaging) to all of your registered devices.</p>
-  <p>
-   Check out the <a
-    href="http://developers.google.com/eclipse/docs/cloud_endpoints"
-    target="_blank">docs</a> for more information.
-  </p>
+    <!-- Full Width Image Header with Logo -->
+    <!-- Image backgrounds are set within the full-width-pics.css file. -->
+    
+    <header class="image-bg-fluid-height">
 
-  <div class="regDevicesSection">
-   <h3>Registered Devices</h3>
-   <table class="table table-striped" id="regDevicesTable">
-    <thead>
-     <tr>
-      <th>Searching for registered devices...</th>
-     </tr>
-    </thead>
-   </table>
-  </div>
+    </header>
+     
 
-  <div class="form-sendmessage">
-   <input class="input-block-level" type="text" id="inputMessage"
-    placeholder="Message">
-   <button id="sendButton" class="btn btn-large btn-primary btn-block">Send</button>
-  </div>
+    <!-- Content Section -->
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="section-heading">Phone Laptop Interface (PLI)</h1>
+                    <p class="lead section-lead">Welcome!</p>
+                    <p class="section-paragraph">The objective of Phone Laptop Interface, or PLI, is to transform any laptop into a server 
+                    accessible by multiple devices. This web application features multiple rooms where you can connect and compete with
+                    your friends in a game of Rock-Paper-Scissors! Please select one of the rooms at the bottom of the
+                    page to connect and start competing with your friends! </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p class="lead section-lead">Rock-Paper-Scissors Rules</p>
+                    <p class="section-paragraph">Rock-Paper-Scissors is a hand game
+                    usually played by two people, where players simultaneously form one of
+                    three shapes with an outstretched hand. The "rock" beats scissors, the
+                    "scissors" beat paper and the "paper" beats rock; if both players throw
+                    the same shape, the game is tied. </p>
+                </div>
+            </div>
+        </div>
+        
+        <table align = "center">
+  <tr>
+    <th>Room:</th>
+    <th>Game:</th>
+    <th>Game status:</th>
+  </tr>
+  <tr>
+  
+    <td><a href="Room1.html">Room #1</a></td>
+    <td>Rock-Paper-Scissors</td>
+    <td>One user online</td>
+  </tr>
+  <tr>
+    <td><a href="#">Room #2</a></td>
+    <td>Rock-Paper-Scissors</td>
+    <td>Full room</td>
+  </tr>
+  <tr>
+    <td><a href="#">Room #3</a></td>
+    <td>Rock-Paper-Scissors</td>
+    <td>Empty room</td>
+  </tr>
+</table>
 
-  <div id="alertArea" class="alert alertStyle">
-   <button type="button" class="close">&times;</button>
-   <div id="alertContentArea"></div>
-  </div>
+    </section>
 
-  <div id="successArea" class="alert alertStyle alert-success fade in">
-   Message Sent!</div>
- </div>
- <div class='container navbar navbar-fixed-bottom'>
-  <p class='text-error'>
-   <small>NOTE: This page is not protected by authentication! If
-    you decide to deploy this application, anyone will be able to access
-    it! Information on configuring auth can be found <a
-    href="https://developers.google.com/appengine/articles/auth"
-    target="_blank">here.</a>
-   </small>
-  </p>
- </div>
 
- <!-- JavaScript -->
- <script src="https://apis.google.com/js/client.js?onload=loadGapi">
-  {
-    "client": {},
-      "googleapis.config": {
-        root: API_URL
-      }
-  }
-  </script>
- <script src="js/jquery-1.9.0.min.js"></script>
- <script src="js/bootstrap.min.js"></script>
 
- <script type="text/javascript">
-    $("#sendButton").click(sendMessage);
-    $("#alertArea").hide();
-    $("#successArea").hide();
-    $('.alert .close').on('click', function() {
-      $(this).parent().hide();
-    })
-  </script>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Team Phone Laptop Interface 2014</p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </footer>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.minn.js"></script>
+
 </body>
+
 </html>
