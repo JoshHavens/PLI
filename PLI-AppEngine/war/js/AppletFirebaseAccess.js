@@ -8,6 +8,7 @@ var Selection1;
 var User2;
 var Selection2;
 var userArray = new Array();
+var selections;
 
 function setRoundStart() {
 	myFirebaseRef.child('startRound').set('true');
@@ -39,14 +40,22 @@ function getUsers() {
 		{
 		console.log(userArray[i]);
 		}
-
+		User1 = userArray[0];
+		User2 = userArray[1];
+		
+		
+		selections = JSON.stringify(ss.Users);
+		
+		
 		/**
 		 * Hard coded way to get user and selections
 		 */
+		/*
 		 User1 = users.Users[1].Name; // User 1: Wally
 		 Selection1 = users.Users[1].Selection; // Selection1: Paper
 		 User2 = users.Users[2].Name; // User 2: Josh
 		 Selection2 = users.Users[2].Selection; // Selection2: Rock
+		*/
 		return users;
 	});
 }
@@ -58,6 +67,10 @@ function getUsers() {
  */
 function getUserArray(){
 	return userArray;
+}
+
+function getSelections(){
+	return selections;
 }
 
 function getUser1() {
