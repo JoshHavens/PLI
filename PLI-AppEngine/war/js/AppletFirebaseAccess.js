@@ -18,6 +18,24 @@ function setEndRound() {
 	myFirebaseRef.child('startRound').set(null);
 }
 
+myFirebaseRef.on('value', function(dataSnapshot){
+	var ss = dataSnapshot.val();
+	selections = JSON.stringify(ss.Users);
+});
+
+myFirebaseRef.on('child_removed', function(oldChildSnapshot){
+	var ss = oldChildSnapshot.val();
+
+	
+});
+
+myFirebaseRef.on('child_added', function(childSnapshot, prevChildName){
+	var ss = childSnapshot.val();
+});
+
+
+
+
 function getUsers() {
 	myFirebaseRef.once('value', function(snap) {
 		var ss = snap.val();
@@ -38,7 +56,7 @@ function getUsers() {
 		
 		for (i=0;i<userArray.length;i++)
 		{
-		console.log(userArray[i]);
+		//console.log(userArray[i]);
 		}
 		User1 = userArray[0];
 		User2 = userArray[1];
