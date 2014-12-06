@@ -7,6 +7,7 @@ var User1;
 var Selection1;
 var User2;
 var Selection2;
+var userArray = new Array();
 
 function setRoundStart() {
 	myFirebaseRef.child('startRound').set('true');
@@ -19,30 +20,44 @@ function setEndRound() {
 function getUsers() {
 	myFirebaseRef.once('value', function(snap) {
 		var ss = snap.val();
-		//return a JSObject
-		var ex = JSON.stringify(ss);
+		var stringJSON = JSON.stringify(ss);
+		var parsedJSON = JSON.parse(stringJSON);
+
+		/**
+		 * This code parses the JSON file and finds the name
+		 * of all users and puts them into the userArray array
+		 * 
+		 */
+		var users = parsedJSON.Users;	
+		for(var key in users){
+			if(users.hasOwnProperty(key)){
+				userArray.push(key);
+			}
+		}
 		
-		var users = JSON.parse(ex);
-		console.log(users.Users["auhf"]);
-		console.log(users);
-		var name = users.Users[1].Name;
-		console.log(name);
-		var selection = users.Users[1].Selection;
-		console.log(selection);
-		User1 = users.Users[1].Name;
-		Selection1 = users.Users[1].Selection;
-		User2 = users.Users[2].Name;
-		Selection2 = users.Users[2].Selection;
-		console.log(User2);
-		console.log(Selection2);
-		
-		console.log(ss);
-		console.log(ex);
-		console.log(users);
+		for (i=0;i<userArray.length;i++)
+		{
+		console.log(userArray[i]);
+		}
+
+		/**
+		 * Hard coded way to get user and selections
+		 */
+		 User1 = users.Users[1].Name; // User 1: Wally
+		 Selection1 = users.Users[1].Selection; // Selection1: Paper
+		 User2 = users.Users[2].Name; // User 2: Josh
+		 Selection2 = users.Users[2].Selection; // Selection2: Rock
 		return users;
-		//return a JSON object
-		//return JSON.stringify(ss);
 	});
+}
+
+
+/**
+ * Returns the array consistinig of all of the users
+ * @returns {Array}
+ */
+function getUserArray(){
+	return userArray;
 }
 
 function getUser1() {
