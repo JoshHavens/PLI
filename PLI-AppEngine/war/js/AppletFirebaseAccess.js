@@ -21,6 +21,18 @@ function setEndRound() {
 myFirebaseRef.on('value', function(dataSnapshot){
 	var ss = dataSnapshot.val();
 	selections = JSON.stringify(ss.Users);
+	var stringJSON = JSON.stringify(ss);
+	var parsedJSON = JSON.parse(stringJSON);
+	var users = parsedJSON.Users;	
+	for(var key in users){
+		if(users.hasOwnProperty(key)){
+			userArray.push(key);
+		}
+	}
+	User1 = userArray[0];
+	User2 = userArray[1];
+	
+	
 });
 
 myFirebaseRef.on('child_removed', function(oldChildSnapshot){
