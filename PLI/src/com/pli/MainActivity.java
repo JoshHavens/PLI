@@ -1,72 +1,40 @@
 package com.pli;
 
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 
 public class MainActivity extends Activity {
-	private static String displayName = "";
-	private static Button room1;
-	private static Button room2;
-	private static Button room3;
+	private static String displayName;
+	private static Intent intent;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		room1 = (Button) findViewById(R.id.room1);
-		room2 = (Button) findViewById(R.id.room2);
-		room3 = (Button) findViewById(R.id.room3);
-		final Intent intent = new Intent(this, RoomActivity.class);
-		
-		room1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {   
-            	intent.putExtra("Name", displayName);
-            	intent.putExtra("Number", "Room1");
-        		startActivity(intent);
-            }
-        });
-		
-		room2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-            	intent.putExtra("Name", displayName);
-            	intent.putExtra("Number", "Room2");
-        		startActivity(intent);
-            }
-        });
-		
-		room3.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-            	intent.putExtra("Name", displayName);
-            	intent.putExtra("Number", "Room3");
-        		startActivity(intent);
-            }
-        });
-		if (displayName == "") {
-			promptForName();
-		}
+		displayName = getIntent().getExtras().getString("Name");
+		intent = new Intent(this, RockPaperScissors.class);
+		intent.putExtra("Name", displayName);
 	}
-
-	private void promptForName() {
-		AlertDialog.Builder alert = new AlertDialog.Builder(this);
-		alert.setTitle("Choose Name");
-		alert.setMessage("Enter your display name below");
-		final EditText input = new EditText(this);
-		alert.setView(input);
-		alert.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
-
-			public void onClick(DialogInterface dialog, int which) {
-				Editable value = input.getText();
-				displayName = value.toString();
-			}
-			
-		});
-		alert.show();
+	
+	public void clickRoom1(View view) {
+    	intent.putExtra("Room", "Room1");
+		startActivity(intent);
+	}
+	
+	public void clickRoom2(View view) {
+    	intent.putExtra("Room", "Room2");
+		startActivity(intent);
+	}
+	
+	public void clickRoom3(View view) {
+    	intent.putExtra("Room", "Room3");
+		startActivity(intent);
+	}
+	
+	public void clickChangeName(View view) {
+		final Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+		startActivity(intent);
 	}
 }

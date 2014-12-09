@@ -1,0 +1,47 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+
+    android:gravity="center_vertical|center_horizontal|center"
+    android:orientation="vertical" >
+    
+  <TextView 
+      android:id="@+id/msgView"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="1" />
+    	
+  <Button
+      android:id="@+id/rock"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="0"
+      android:text="Rock" 
+      android:onClick="clickRock"/>
+
+  <Button
+      android:id="@+id/paper"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="0"
+      android:text="Paper"
+      android:onClick="clickPaper" />
+  
+  <Button
+      android:id="@+id/scissors"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="0"
+      android:text="Scissors"
+      android:onClick="clickScissors" />
+  
+  <Button
+      android:id="@+id/exit"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="0"
+      android:text="Exit Room"
+      android:onClick="clickExit" />
+
+</LinearLayout>
