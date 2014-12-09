@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+   <!-- Firebase install -->
+   <script src="https://cdn.firebase.com/js/client/2.0.5/firebase.js"></script>
+      
+	<link rel="shortcut icon" href="https://cdn2.iconfinder.com/data/icons/office/512/Icon_8-512.png">
+
+    <title>Phone Laptop Interface</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.minn.css" rel="stylesheet">
+
+    
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<style>
+table, td, th {
+    border: 1px solid black;
+    font-size:20px;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+td{
+	padding: 25px;
+}
+
+th{
+	padding: 15px;
+}
+
+th {
+    background-color: black;
+    color: white;
+}
+</style>
+
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Home</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="Room1.html">Room #1</a>
+                    </li>
+                    <li>
+                        <a href="http://1-dot-plikley-ee461l-blog.appspot.com/">Blog Page</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    
+     
+
+    <!-- Content Section -->
+    <section>
+   
+   <!-- import JS library for firebase accessor functions -->
+   <script type="text/javascript" src="../js/AppletFirebaseAccess2.js"></script>
+   
+        <br><br><br>
+                    <h1 class="section-heading" align="center">Rock Paper Scissors Room #2</h1>
+    </section>
+    <br>
+
+
+<applet code=RPSGame.class archive="RPSGame.jar" align="middle" width="1000" height="1000">
+        Java applet for rock paper scissors.</applet>
+
+
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.minn.js"></script>
+
+
+</body>
+
+
+
+</html>
