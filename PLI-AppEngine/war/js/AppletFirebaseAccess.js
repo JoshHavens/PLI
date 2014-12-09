@@ -3,15 +3,13 @@
  */
 
 var myFirebaseRef = new Firebase("https://pli-kley.firebaseio.com/Room1");
-var User1;
 var Selection1;
-var User2;
 var Selection2;
 var userArray = new Array();
 var selections;
 
 function setRoundStart() {
-    myFirebaseRef.child('startRound').set('true');
+    myFirebaseRef.update({"startRound":"true"});
 }
 
 function setEndRound() {
@@ -29,17 +27,6 @@ myFirebaseRef.on('value', function(dataSnapshot) {
             userArray.push(key);
         }
     }
-    if (userArray.length >= 2) {
-        User2 = userArray.pop();
-        User1 = userArray.pop();
-    } else if (userArray.length >= 1) {
-        User1 = userArray.pop();
-        User2 = null;
-    } else {
-        User1 = null;
-        User2 = null;
-    }
-
 });
 
 myFirebaseRef.child('Users').on('child_removed', function(oldChildSnapshot) {
@@ -68,32 +55,15 @@ function getUsers() {
         for ( var key in users) {
             if (users.hasOwnProperty(key)) {
                 userArray.push(key);
+                console.log(userArray[userArray.length - 1].child('Name'));
             }
         }
 
         for (i = 0; i < userArray.length; i++) {
             // console.log(userArray[i]);
         }
-        if (userArray.length >= 2) {
-            User2 = userArray.pop();
-            User1 = userArray.pop();
-        } else if (userArray.length >= 1) {
-            User1 = userArray.pop();
-        } else {
-            return null;
-        }
-
         selections = JSON.stringify(ss.Users);
-
-        /**
-         * Hard coded way to get user and selections
-         */
-        /*
-         * User1 = users.Users[1].Name; // User 1: Wally Selection1 =
-         * users.Users[1].Selection; // Selection1: Paper User2 =
-         * users.Users[2].Name; // User 2: Josh Selection2 =
-         * users.Users[2].Selection; // Selection2: Rock
-         */
+        
         return users;
     });
 }
@@ -111,16 +81,20 @@ function getSelections() {
     return selections;
 }
 
+function getUser(i){
+    return userArray[i];
+}
+
 function getUser1() {
-    return User1;
+    return getUser(0);
 }
 
 function getSelection1() {
-    return Selection1;
+    return getUser(1);
 }
 
 function getUser2() {
-    return User2;
+    return userArray[1];
 }
 
 function getSelection2() {
