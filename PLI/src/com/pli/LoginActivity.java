@@ -22,7 +22,9 @@ public class LoginActivity extends Activity {
             public void onClick(View v) {
             	String displayName = input.getText().toString();
             	if (displayName.trim().length() > 0) {
-            		intent.putExtra("Name", displayName);
+            		Bundle login = new Bundle();
+            		login.putString("Name", displayName);
+            		intent.putExtras(login);
             		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             		startActivity(intent);
 				}

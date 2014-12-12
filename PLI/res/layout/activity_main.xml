@@ -12,15 +12,14 @@
         android:text="@string/welcome" />
 
     <Button
-        android:id="@+id/room3"
+        android:id="@+id/room1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/room2"
-        android:layout_marginTop="78dp"
-        android:layout_weight="0"
-        android:text="Room 3"
-        android:onClick="clickRoom3" />
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="98dp"
+        android:onClick="clickRoom1"
+        android:text="@string/room_1" />
 
     <Button
         android:id="@+id/room2"
@@ -29,21 +28,18 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/room1"
         android:layout_marginTop="110dp"
-        android:layout_weight="0"
-        android:text="Room 2"
-        android:onClick="clickRoom2" />
+        android:onClick="clickRoom2"
+        android:text="@string/room_2" />
 
     <Button
-        android:id="@+id/room1"
+        android:id="@+id/room3"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="98dp"
-        android:layout_weight="0"
-        android:text="Room 1" 
-        android:onClick="clickRoom1"/>
-
+        android:layout_below="@+id/room2"
+        android:layout_marginTop="78dp"
+        android:onClick="clickRoom3"
+        android:text="@string/room_3" />
 
     <Button
         android:id="@+id/changeName"
@@ -52,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="Change Display Name"
-        android:onClick="clickChangeName" />
+        android:onClick="clickChangeName"
+        android:text="@string/change_name" />
 
 </RelativeLayout>

@@ -25,9 +25,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/login"
-        android:layout_weight="0"
         android:ems="10"
-        android:inputType="textEmailAddress" >
+        android:inputType="textEmailAddress|textCapSentences" >
 
         <requestFocus />
     </EditText>
