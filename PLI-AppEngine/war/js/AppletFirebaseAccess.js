@@ -7,6 +7,7 @@ var Selection1;
 var Selection2;
 var userArray = new Array();
 var selections;
+var stringSelections;
 
 function setRoundStart() {
     myFirebaseRef.update({"startRound":"true"});
@@ -19,8 +20,11 @@ function setEndRound() {
 myFirebaseRef.on('value', function(dataSnapshot) {
     var ss = dataSnapshot.val();
     selections = JSON.stringify(ss.Users);
+    
     var stringJSON = JSON.stringify(ss);
+    stringSelections = stringJSON;
     var parsedJSON = JSON.parse(stringJSON);
+    
     var users = parsedJSON.Users;
     for ( var key in users) {
         if (users.hasOwnProperty(key)) {
@@ -43,26 +47,34 @@ myFirebaseRef.child('Users').on('child_added',
 function getUsers() {
     myFirebaseRef.once('value', function(snap) {
         var ss = snap.val();
+        console.log(ss);
+        
+        
         var stringJSON = JSON.stringify(ss);
+        stringSelections = stringJSON;
+        
         var parsedJSON = JSON.parse(stringJSON);
-
+       
         /**
          * This code parses the JSON file and finds the name of all users and
          * puts them into the userArray array
          * 
          */
+        
         var users = parsedJSON.Users;
+        
         for ( var key in users) {
             if (users.hasOwnProperty(key)) {
                 userArray.push(key);
-                console.log(userArray[userArray.length - 1].child('Name'));
+                console.log(key);
+                //console.log(userArray[userArray.length - 1].child('Name'));
             }
         }
 
         for (i = 0; i < userArray.length; i++) {
             // console.log(userArray[i]);
         }
-        selections = JSON.stringify(ss.Users);
+        //selections = JSON.stringify(ss.Users);
         
         return users;
     });
@@ -75,6 +87,10 @@ function getUsers() {
  */
 function getUserArray() {
     return userArray;
+}
+
+function getStringSelections() {
+    return stringSelections;
 }
 
 function getSelections() {
