@@ -8,10 +8,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    
+    <!-- Firebase install -->
+   <script src="https://cdn.firebase.com/js/client/2.0.5/firebase.js"></script>
 
 	<link rel="shortcut icon" href="https://cdn2.iconfinder.com/data/icons/office/512/Icon_8-512.png">
 
     <title>Phone Laptop Interface</title>
+    
+    <script> 
+    var Room1;
+    var cap_Room1;
+    var num_Room1;
+    var Room2;
+    var cap_Room2;
+    var num_Room2;
+    var Room3;
+    var cap_Room3;
+    var num_Room3;
+    
+    var myFirebaseRef = new Firebase("https://pli-kley.firebaseio.com/");
+    
+    myFirebaseRef.on("value", function(data) {
+  		Room1 = data.child("Room1/Game").val();
+  		cap_Room1 = data.child("Room1/Capacity").val();
+  		num_Room1 = data.child("Room1/Users").numChildren();
+  		Room2 = data.child("Room2/Game").val();
+  		cap_Room2 = data.child("Room2/Capacity").val();
+  		num_Room2 = data.child("Room2/Users").numChildren();
+  		Room3 = data.child("Room3/Game").val();
+  		cap_Room3 = data.child("Room3/Capacity").val();
+  		num_Room3 = data.child("Room3/Users").numChildren();
+  		
+	});
+	
+	var loop = setInterval(function(){ loaded() }, 1000);
+	
+	function loaded() {
+		document.getElementById("Room1").innerHTML = Room1;
+		document.getElementById("Room2").innerHTML = Room2;
+		document.getElementById("Room3").innerHTML = Room3;
+		document.getElementById("cap_Room1").innerHTML = cap_Room1;
+		document.getElementById("cap_Room2").innerHTML = cap_Room2;
+		document.getElementById("cap_Room3").innerHTML = cap_Room3;
+		document.getElementById("num_Room1").innerHTML = num_Room1;
+		document.getElementById("num_Room2").innerHTML = num_Room2;
+		document.getElementById("num_Room3").innerHTML = num_Room3;
+	}
+	
+    </script>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.minn.css" rel="stylesheet">
@@ -51,7 +96,7 @@ th {
 </style>
 
 
-<body>
+<body onload="loaded()">
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -132,23 +177,23 @@ th {
   <tr>
     <th>Room:</th>
     <th>Game:</th>
-    <th>Game status:</th>
+    <th>Users online:</th>
   </tr>
   <tr>
   
     <td><a href="Room1.html">Room #1</a></td>
-    <td>Rock-Paper-Scissors</td>
-    <td>Active Room</td> 
+    <td><span id="Room1"></span></td>
+    <td><span id="num_Room1"></span>/<span id="cap_Room1"></span></td> 
   </tr>
   <tr>
     <td><a href="Room2.html">Room #2</a></td>
-    <td>Rock-Paper-Scissors</td>
-    <td>Active Room</td> 
+    <td><span id="Room2"></span></td>
+    <td><span id="num_Room2"></span>/<span id="cap_Room2"></span></td> 
   </tr>
   <tr>
     <td><a href="Room3.html">Room #3</a></td>
-    <td>Rock-Paper-Scissors</td>
-    <td>Active Room</td> 
+    <td><span id="Room3"></span></td>
+    <td><span id="num_Room3"></span>/<span id="cap_Room3"></span></td> 
   </tr>
 </table>
 
