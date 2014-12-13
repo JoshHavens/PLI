@@ -17,7 +17,7 @@
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:layout_weight="0"
-      android:text="Rock" 
+      android:text="@string/rock" 
       android:onClick="clickRock"/>
 
   <Button
@@ -25,7 +25,7 @@
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:layout_weight="0"
-      android:text="Paper"
+      android:text="@string/paper"
       android:onClick="clickPaper" />
   
   <Button
@@ -33,7 +33,7 @@
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:layout_weight="0"
-      android:text="Scissors"
+      android:text="@string/scissors"
       android:onClick="clickScissors" />
   
   <Button
@@ -41,7 +41,7 @@
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:layout_weight="0"
-      android:text="Exit Room"
+      android:text="@string/exit_room"
       android:onClick="clickExit" />
 
 </LinearLayout>
