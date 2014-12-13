@@ -110,7 +110,7 @@ function getSelection1() {
 }
 
 function getUser2() {
-    return userArray[1];
+    return getUser(1);
 }
 
 function getSelection2() {
@@ -127,7 +127,11 @@ function tossAlert(s) {
 }
 
 function setScore(id,score){
-    myFirebaseRef.child('Users').child(id).child('score').set(score);
+    myFirebaseRef.child('Users').child(id).child('Score').set(score);
+}
+
+function setCommand(id,val){
+    myFirebaseRef.child('Users').child(id).child('Selection').set(val);
 }
 
 var debug = 0;
