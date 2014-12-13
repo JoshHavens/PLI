@@ -7,27 +7,31 @@
 # view AndroidManifest.xml #generated:32
 -keep class com.pli.RockPaperScissors { <init>(...); }
 
-# onClick res/layout/activity_main.xml #generated:48
+# onClick res/layout/activity_main.xml #generated:44
 -keepclassmembers class * { *** clickChangeName(...); }
 
-# onClick res/layout/activity_rockpaperscissors.xml #generated:39
+# onClick land\res/layout-land/activity_rockpaperscissors.xml #generated:68
+# onClick res/layout/activity_rockpaperscissors.xml #generated:51
 -keepclassmembers class * { *** clickExit(...); }
 
-# onClick res/layout/activity_rockpaperscissors.xml #generated:23
+# onClick land\res/layout-land/activity_rockpaperscissors.xml #generated:36
+# onClick res/layout/activity_rockpaperscissors.xml #generated:27
 -keepclassmembers class * { *** clickPaper(...); }
 
-# onClick res/layout/activity_rockpaperscissors.xml #generated:15
+# onClick land\res/layout-land/activity_rockpaperscissors.xml #generated:23
+# onClick res/layout/activity_rockpaperscissors.xml #generated:14
 -keepclassmembers class * { *** clickRock(...); }
 
-# onClick res/layout/activity_main.xml #generated:36
+# onClick res/layout/activity_main.xml #generated:14
 -keepclassmembers class * { *** clickRoom1(...); }
 
-# onClick res/layout/activity_main.xml #generated:25
+# onClick res/layout/activity_main.xml #generated:24
 -keepclassmembers class * { *** clickRoom2(...); }
 
-# onClick res/layout/activity_main.xml #generated:14
+# onClick res/layout/activity_main.xml #generated:34
 -keepclassmembers class * { *** clickRoom3(...); }
 
-# onClick res/layout/activity_rockpaperscissors.xml #generated:31
+# onClick land\res/layout-land/activity_rockpaperscissors.xml #generated:49
+# onClick res/layout/activity_rockpaperscissors.xml #generated:40
 -keepclassmembers class * { *** clickScissors(...); }
 
