@@ -126,6 +126,10 @@ function tossAlert(s) {
     alert(s);
 }
 
+function setScore(id,score){
+    myFirebaseRef.child('Users').child(id).child('score').set(score);
+}
+
 var debug = 0;
 if (debug == 1) {
     myFirebaseRef.child('Users').child('1').child('devID').set(12345);
